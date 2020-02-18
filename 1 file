@@ -1,0 +1,65 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+from matplotlib.aanimation import ArtistAnimation
+import mpl_toolkits.mplot3d.axes3d as p3
+
+ax = p3.Axes3D(fig)
+N = 200
+t = np.linspace(0, 4.3, N)
+
+def move_func(s,t):
+    x, v_x,
+    y, v_y,
+    z, v_z = s
+    dxdt = v_x
+    dv_xdt = x/a**2 * (g - (v_x**2*a**2)-(v_y**2b**2)-(v_z**2*c**2))/((x**2/a**4)+(y**2/b**4)+(z**2/c**4))
+    
+    dydt = v_y
+    dv_ydt = y/b**2 * (g - (v_x**2*a**2)-(v_y**2b**2)-(v_z**2*c**2))/((x**2/a**4)+(y**2/b**4)+(z**2/c**4))
+    
+    dzdt = v_x
+    dv_zdt = -g*x/a**2 * (g - (v_x**2*a**2)-(v_y**2b**2)-(v_z**2*c**2))/((x**2/a**4)+(y**2/b**4)+(z**2/c**4))   
+    
+    return dxdt, dv_xdt, dydt, dv_ydt, dzdt, dv_zdt
+x0 = 
+v_x0 = 
+
+y0 = 
+v_y0 = 
+ 
+z0 = 
+v_z0 = 
+
+s0 = x0, v_x0, y0, v_y0, z0, v_z0
+
+g = 9.81
+
+sol = odeint(move_func, s0, t)
+
+fig = plt.figure()
+bodys = []
+step = int(N/100)   
+
+ball, = ax.plot(x, y, z, 'o', color='b')
+line, = ax.plot(x, y, z, '-', color='b')
+
+def animation_func(i):
+    ball.set_data(x[i], y[i])
+    ball.set_3d_properties(z[i])
+    
+    line.set_data(x[:i], y[:i])
+    line.set_3d_properties(z[:i])
+
+ax.set_xlim3d([-10.0, 10.0])
+ax.set_xlabel('X')
+
+ax.set_ylim3d([0, 20.0])
+ax.set_ylabel('Y')
+
+ax.set_zlim3d([-10.0, 10.0])
+ax.set_zlabel('Z')
+
+ani = animation.FuncAnimation(fig, animation_func, N, interval=50)
+
+ani.save('ani.gif') 
