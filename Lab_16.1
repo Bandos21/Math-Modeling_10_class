@@ -1,0 +1,27 @@
+from sympy import *
+
+f = Function('f')
+x = Function('x')
+y = Function('y')
+z = Function('z')
+
+a = Symbol('a')
+b = Symbol('b')
+c = Symbol('c')
+t = Symbol('t')
+
+
+R = 1
+f = x(t)**2/a**2 + y(t)**2/b**2 + z(t)**2/c**2 - R
+
+print(diff(f, x(t)))
+
+print(diff(f, y(t)))
+
+
+print(diff(f, z(t)))
+
+print(diff(f, t))
+
+
+print(diff(diff(f, t), t))
